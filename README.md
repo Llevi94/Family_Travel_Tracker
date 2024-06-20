@@ -1,4 +1,4 @@
-# Family Travel Tracker Project [![Family Travel Tracker Project](/public/images/world.png)](https://<add>.onrender.com/)
+# Family Travel Tracker Project [![Family Travel Tracker Project](/public/images/world.png){: width="100px" height="100px"}](https://<add>.onrender.com/)
 
 Family Travel Tracker is a full-stack project enabling family members to register as users and track visited countries. Users can mark countries they've visited and view collective travel data, including the total number of countries visited by each family member. 
 
@@ -20,7 +20,8 @@ In the deployment strategy for the Family Travel Tracker project, Render was cho
 <br>
 
 <p float="left">
-<img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*UW_9OOQYuPWHvt4QuXOLlA.png" width="150" height="100">
+<img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*UW_9OOQYuPWHvt4QuXOLlA.png" width="180" height="80">
+<img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*i2fRBk3GsYLeUk_Rh7AzHw.png" width="180" height="80">
 <img src="https://www.freepnglogos.com/uploads/javascript/logo-html-5-css-javascript-source-code-for-the-taking-23.png" width="150" height="100">
 <img src="https://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/89884/render-status-4b015255-e0cc-422c-943d-4f60b5f03094.png" width="220" height="70">
 </p>
