@@ -107,7 +107,6 @@ app.post("/add", async (req, res) => {
 
 //Handles clicks on the top bar
 app.post("/user", async (req, res) => {
-  console.log("im here");
   //new family member
   if (req.body.add === "new") {
     res.render("new.ejs", {
@@ -134,7 +133,6 @@ app.post("/new", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     //if the user name already taken 
-    console.log("IM HERE : " + err);
     newUserError = true;
     res.redirect("/new");
   }
