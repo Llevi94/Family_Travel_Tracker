@@ -27,7 +27,7 @@ let users = [];
 let spellingError = false;
 let newUserError = false;
 
-////Returns a list of countries marked by the current user by his ID
+//Returns a list of countries marked by the current user by his ID
 async function checkVisisted() {
   const result = await db.query(
     "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1; ", 
@@ -69,7 +69,7 @@ app.get("/", async (req, res) => {
 
 //Adds a new country to the user's profile based on user input
 app.post("/add", async (req, res) => {
-  const input = req.body["country"];
+  const input = req.body["country"].replace(/\s/g, ''); //remove spaces
   const currentUser = await getCurrentUser();
 
   try {
@@ -96,6 +96,7 @@ app.post("/add", async (req, res) => {
         res.redirect("/");
       } catch (err) {
         //Handles errors for duplicate country addition
+        spellingError = false;
         console.log(err);
         res.redirect("/");
       }
