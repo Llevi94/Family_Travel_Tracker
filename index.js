@@ -27,7 +27,7 @@ let users = [];
 let spellingError = false;
 let newUserError = false;
 
-//finds the countries linked to the current user by his ID
+////Returns a list of countries marked by the current user by his ID
 async function checkVisisted() {
   const result = await db.query(
     "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1; ", 
@@ -40,23 +40,24 @@ async function checkVisisted() {
   return countries;
 }
 
-//return the users
+//Returns the selected user 
 async function getCurrentUser() {
   const result = await db.query("SELECT * FROM users");
-  users = result.rows; // update the users arr
+  users = result.rows;
   return users.find((user) => user.id == currentUserId);
 }
 
+//New user page
 app.get("/new", async (req, res) => {
   res.render("new.ejs", {
     error: newUserError,
   });
 });
 
-//show the countries of the current user
+//Main page
 app.get("/", async (req, res) => {
-  const countries = await checkVisisted(); //get the current user countries
-  const currentUser = await getCurrentUser(); //get the currnt user id, name, color
+  const countries = await checkVisisted(); //user countries
+  const currentUser = await getCurrentUser(); //user id, name, color
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
@@ -66,7 +67,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-// add new country to the current user
+//Adds a new country to the user's profile based on user input
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
   const currentUser = await getCurrentUser();
@@ -80,7 +81,7 @@ app.post("/add", async (req, res) => {
     //console.log("result: " + console.log(JSON.stringify(result)));
 
     if (result.rowCount == 0) {
-      //incorrect spelling of country name
+      //Handles errors for incorrect country name input
       spellingError = true;
       res.redirect("/");
     } else {
@@ -94,7 +95,7 @@ app.post("/add", async (req, res) => {
         spellingError = false;
         res.redirect("/");
       } catch (err) {
-        //if the country has already been marked as visited
+        //Handles errors for duplicate country addition
         console.log(err);
         res.redirect("/");
       }
@@ -104,35 +105,31 @@ app.post("/add", async (req, res) => {
   }
 });
 
-//get the ID of the selected user or open the new user page
+//Handles clicks on the top bar
 app.post("/user", async (req, res) => {
-  // if we click on the action="/user" in the ejs file (the top bar)
+  console.log("im here");
+  //new family member
   if (req.body.add === "new") {
-    //submit type in the ejs = if we click on the add place
     res.render("new.ejs", {
       error: newUserError,
     });
   } else {
-    currentUserId = req.body.user; // in the ejs its name = user, and the value = id so we get the user id
+    currentUserId = req.body.user; // current user id
     res.redirect("/");
   }
 });
 
-//create new user
+//Displays error if user exists, otherwise creates new user and returns ID (ADD btn)
 app.post("/new", async (req, res) => {
-  //new user
   const name = req.body.name;
   const color = req.body.color;
-
-
   try {
     const result = await db.query(
       "INSERT INTO users (name, color) VALUES($1, $2) RETURNING *;", //returns the new user along with the automatically assigned ID
       [name, color]
     );
-  
     const id = result.rows[0].id; //new user id
-    currentUserId = id; //this is the current user to show after added
+    currentUserId = id;
   
     res.redirect("/");
   } catch (err) {
@@ -142,16 +139,6 @@ app.post("/new", async (req, res) => {
     res.redirect("/new");
   }
   
-
-  // const result = await db.query(
-  //   "INSERT INTO users (name, color) VALUES($1, $2) RETURNING *;", //returns the new user along with the automatically assigned ID
-  //   [name, color]
-  // );
-
-  // const id = result.rows[0].id; //new user id
-  // currentUserId = id; //this is the current user to show after added
-
-  // res.redirect("/");
 });
 
 app.listen(port, () => {
