@@ -1,10 +1,10 @@
-# Family Travel Tracker Project [<img src="/public/images/world.png" width="60" height="60" />](https://<add>.onrender.com/)
+# Family Travel Tracker Project  [<img src="/public/images/world.png" width="60" height="60" />](https://<add>.onrender.com/)
 
 Family Travel Tracker is a full-stack project enabling family members to register as users and track visited countries. Users can mark countries they've visited and view collective travel data, including the total number of countries visited by each family member. 
 
 ## Technologies
 
-- **PostgreSQL**: Utilized as the database to store user information securely.
+- **PostgreSQL**: Utilized as the database to store users information.
 - **Express.js**: Provided a robust backend framework.
 - **Node.js**: Facilitated server-side scripting.
 - **JavaScript**: Predominantly used for both backend and frontend logic.
