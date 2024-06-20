@@ -4,7 +4,7 @@ import pg from "pg";
 import env from "dotenv";
 
 const app = express();
-const port = 3000;
+const port =  process.env.SERVER_PORT || 3000;
 
 env.config();
 
